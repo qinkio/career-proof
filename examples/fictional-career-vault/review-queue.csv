@@ -1,0 +1,3 @@
+review_id,item_type,item_id,project_id,question,proposed_value,current_value,evidence_ids,risk,decision,status,created_at,resolved_at,notes
+REV-0001,claim,CLM-0001,PRJ-DEMO-001,确认访谈人数和流程节点数量,"6名客服；11个节点归并为5个",,SRC-0002,medium,数字与个人行动已确认,approved,2026-03-01T08:00:00Z,2026-03-01T09:00:00Z,完全虚构示例
+REV-0002,metric,CLM-0002,PRJ-DEMO-001,确认指标口径与个人归因,"中位数8.0天降至5.5天；40个试运行工单；共同负责",,SRC-0002,high,口径与共同归因已确认,approved,2026-03-01T08:05:00Z,2026-03-01T09:05:00Z,完全虚构示例

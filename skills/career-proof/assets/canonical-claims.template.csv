@@ -1,0 +1,1 @@
+claim_id,project_id,claim_text,claim_type,ownership,source_ids,source_locators,metric_name,metric_baseline,metric_result,metric_unit,metric_time_window,metric_population,metric_calculation,status,sensitivity,publication_permission,valid_from,valid_to,supersedes_claim_id,withdrawn_at,notes

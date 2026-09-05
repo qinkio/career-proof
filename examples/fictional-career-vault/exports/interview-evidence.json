@@ -1,0 +1,68 @@
+{
+  "schema_version": "0.2.0",
+  "export_id": "EXP-FICTIONAL001",
+  "generated_at": "2026-03-01T10:00:00Z",
+  "purpose": "interview",
+  "scope": {
+    "project_ids": ["PRJ-DEMO-001"],
+    "claim_ids": []
+  },
+  "profile": {},
+  "projects": [
+    {
+      "project_id": "PRJ-DEMO-001",
+      "title": "客服审批流程试点（虚构）",
+      "date_range": "2025-11至2026-02",
+      "objective": "减少重复审批并缩短工单完成时间",
+      "formal_title": "客服运营专员",
+      "actual_responsibility": "访谈、流程梳理、试点协调和效果复盘"
+    }
+  ],
+  "claims": [
+    {
+      "claim_id": "CLM-0001",
+      "project_id": "PRJ-DEMO-001",
+      "claim_text": "访谈6名虚构客服并将11个重复审批节点归并为5个标准节点",
+      "claim_type": "action",
+      "ownership": "owned",
+      "status": "verified",
+      "sensitivity": "public",
+      "publication_permission": "application-only"
+    },
+    {
+      "claim_id": "CLM-0002",
+      "project_id": "PRJ-DEMO-001",
+      "claim_text": "在40个虚构工单的试运行中将审批完成时间中位数从8.0天降至5.5天",
+      "claim_type": "metric",
+      "ownership": "co-owned",
+      "metric": {
+        "name": "审批完成时间中位数",
+        "baseline": "8.0",
+        "result": "5.5",
+        "unit": "天",
+        "time_window": "2026-01-01至2026-02-28",
+        "population": "40个虚构试运行工单",
+        "calculation": "按每个工单从提交到完成的自然日计算中位数"
+      },
+      "status": "verified",
+      "sensitivity": "public",
+      "publication_permission": "application-only"
+    }
+  ],
+  "capabilities": [
+    {
+      "capability_id": "CAP-0001",
+      "standard_skill": "流程优化",
+      "industry_skill": "客服审批流程优化",
+      "original_expression": "把重复审批节点整理成统一流程",
+      "supporting_claim_ids": ["CLM-0001", "CLM-0002"],
+      "confidence": "high"
+    }
+  ],
+  "exclusions": {
+    "counts_by_reason": {}
+  },
+  "warnings": [
+    "This package contains only fictional demonstration data."
+  ]
+}

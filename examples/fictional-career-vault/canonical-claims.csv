@@ -1,0 +1,3 @@
+claim_id,project_id,claim_text,claim_type,ownership,source_ids,source_locators,metric_name,metric_baseline,metric_result,metric_unit,metric_time_window,metric_population,metric_calculation,status,sensitivity,publication_permission,valid_from,valid_to,supersedes_claim_id,withdrawn_at,notes
+CLM-0001,PRJ-DEMO-001,访谈6名虚构客服并将11个重复审批节点归并为5个标准节点,action,owned,SRC-0002,访谈与流程梳理章节,,,,,,,,verified,public,application-only,2026-03-01,,,,完全虚构示例
+CLM-0002,PRJ-DEMO-001,在40个虚构工单的试运行中将审批完成时间中位数从8.0天降至5.5天,metric,co-owned,SRC-0002,试运行结果表,审批完成时间中位数,8.0,5.5,天,2026-01-01至2026-02-28,40个虚构试运行工单,按每个工单从提交到完成的自然日计算中位数,verified,public,application-only,2026-03-01,,,,与产品和客服主管共同负责；完全虚构示例

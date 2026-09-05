@@ -1,0 +1,3 @@
+capability_id,standard_skill,industry_skill,original_expression,category,claim_ids,project_ids,confidence,status,notes
+CAP-0001,流程优化,客服审批流程优化,把重复审批节点整理成统一流程,operations,CLM-0001|CLM-0002,PRJ-DEMO-001,high,approved,完全虚构示例
+CAP-0002,跨部门协作,客服与产品协同上线,与产品和客服主管共同推进试运行,collaboration,CLM-0002,PRJ-DEMO-001,medium,approved,完全虚构示例

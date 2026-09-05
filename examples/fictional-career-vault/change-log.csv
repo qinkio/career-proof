@@ -1,0 +1,4 @@
+change_id,changed_at,actor,entity_type,entity_id,action,from_value,to_value,reason,snapshot_id
+CHG-0001,2026-03-01T09:00:00Z,user,claim,CLM-0001,promoted,pending,verified,Approved fictional review batch,
+CHG-0002,2026-03-01T09:05:00Z,user,claim,CLM-0002,promoted,pending,verified,Approved fictional metric definition and co-ownership,
+CHG-0003,2026-03-01T09:10:00Z,user,capability,CAP-0001,approved,proposed,approved,Approved fictional capability mapping,

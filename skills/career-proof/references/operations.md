@@ -1,0 +1,65 @@
+# Operations
+
+## Initialize
+
+Run the initializer with `--preview` and show the exact absolute target. Stop and wait for a new path-specific confirmation before using `--yes`; a generic request to build a vault is not that confirmation. The initializer refuses an installed Skill directory and a Git worktree by default. It creates files only when absent and never overwrites a vault.
+
+## Index
+
+1. Index metadata for the user-approved root.
+2. Default new sources to `model_access=pending`, `publication_permission=not-approved`, and conservative sensitivity.
+3. Do not parse document text during indexing.
+4. Hash content only for an existing source marked `allowed`.
+5. Use file identity to recognize moves where supported.
+6. Mark missing files; never silently delete their records.
+7. Report unsupported or unreadable files as errors without constructing claims.
+
+## Capture
+
+Read only sources marked `allowed`. For `summary-only`, use only the manually supplied redacted summary. Never open `do-not-model` sources.
+
+Group evidence around a business objective and result chain. Propose parent/child boundaries when a long program contains distinct stages. Put uncertain boundaries in the review queue.
+
+Draft proposed claims into review items. Do not bypass the queue because a statement appears in a resume or presentation.
+
+## Review
+
+Review one coherent project or evidence chain at a time in this order:
+
+1. Project boundary.
+2. Formal title and actual responsibility.
+3. Personal decisions and actions.
+4. Metrics and result definitions.
+5. Ownership and team-result boundaries.
+6. Sensitivity and publication permission.
+7. Capability mapping.
+
+Record the user's decision and timestamp. Append material promotions, withdrawals, permission changes, merges, and conflict resolutions to `change-log.csv`.
+
+## Snapshot
+
+Before migration, bulk promotion, bulk permission change, or restore, create a metadata snapshot with `snapshot_vault.py`. Snapshots include canonical tables and project cards, not external source documents or managed evidence binaries.
+
+Use restore preview before any recovery. The v0.2 tool reports differences; it does not overwrite the active vault automatically.
+
+## Audit
+
+Run structural validation after changes. Run duplicate/conflict candidate detection before a review batch. Treat candidates as prompts for human review, not automatic corrections.
+
+When a file cannot be read, preserve successful work, record the failure, and create no claim from that file. Never infer content from a filename, folder name, or neighboring document.
+
+## Migration
+
+Migrate to a separate target. Preserve the source vault. Map old privacy values conservatively and place ambiguous permission decisions in the review queue. Do not claim that a structurally successful migration preserves every semantic detail; review migrated metrics and ownership.
+
+## Status
+
+Report:
+
+- source totals by access and status;
+- projects with unresolved boundaries;
+- claims by status and permission;
+- unresolved review items by risk;
+- capabilities without eligible evidence;
+- duplicate and conflict candidates;
+- stale exports and latest snapshot.
