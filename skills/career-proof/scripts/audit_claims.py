@@ -8,7 +8,7 @@ from collections import Counter
 from pathlib import Path
 
 from validate_claims import validate
-from vault_common import read_csv, split_ids
+from vault_common import vault_path, read_csv, split_ids
 
 
 PURPOSES = {"interview", "resume", "portfolio", "private-analysis"}
@@ -66,8 +66,8 @@ def eligibility(row: dict[str, str], sources: dict[str, dict[str, str]], purpose
 def main() -> int:
     args = parse_args()
     vault = Path(args.vault_root).expanduser().resolve()
-    claims_path = vault / "canonical-claims.csv"
-    sources_path = vault / "sources.csv"
+    claims_path = vault_path(vault, "canonical-claims.csv")
+    sources_path = vault_path(vault, "sources.csv")
     errors, warnings, _ = validate(claims_path, sources_path)
     if errors:
         print("CLAIMS_AUDIT_FAILED")

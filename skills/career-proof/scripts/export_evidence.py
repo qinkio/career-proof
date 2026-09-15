@@ -11,7 +11,7 @@ from collections import Counter
 from pathlib import Path
 
 from audit_claims import PURPOSES, eligibility
-from vault_common import SCHEMA_VERSION, read_csv, split_ids, utc_now
+from vault_common import vault_path, SCHEMA_VERSION, read_csv, split_ids, utc_now
 
 
 def parse_args() -> argparse.Namespace:
@@ -95,9 +95,9 @@ def main() -> int:
         print(f"error: refusing to overwrite existing export: {output}", file=sys.stderr)
         return 1
     try:
-        _, claim_rows = read_csv(vault / "canonical-claims.csv")
-        _, source_rows = read_csv(vault / "sources.csv")
-        _, capability_rows = read_csv(vault / "capability-map.csv")
+        _, claim_rows = read_csv(vault_path(vault, "canonical-claims.csv"))
+        _, source_rows = read_csv(vault_path(vault, "sources.csv"))
+        _, capability_rows = read_csv(vault_path(vault, "capability-map.csv"))
     except (OSError, UnicodeError) as exc:
         print(f"error: cannot read vault tables: {exc}", file=sys.stderr)
         return 1
@@ -123,7 +123,7 @@ def main() -> int:
     included_projects = {str(row["project_id"]) for row in included}
     projects = []
     for project_id in sorted(included_projects):
-        path = vault / "projects" / f"{project_id}.md"
+        path = vault_path(vault, "projects") / f"{project_id}.md"
         projects.append(parse_project(path) if path.is_file() else {"project_id": project_id})
 
     capabilities = []

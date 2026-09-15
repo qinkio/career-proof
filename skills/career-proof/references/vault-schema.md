@@ -2,20 +2,20 @@
 
 ## Workspace
 
+Logical names such as `canonical-claims.csv` identify roles, not mandatory root-level filenames. Prefer a readable layout for a human-maintained vault; preserve an established layout unless organization is requested.
+
 ```text
-career-vault/
-├── profile.md
-├── career-timeline.md
-├── sources.csv
-├── canonical-claims.csv
-├── capability-map.csv
-├── review-queue.csv
-├── change-log.csv
-├── projects/
-├── evidence/
-├── exports/
-└── archive/
+职业资产库/
+├── 00-职业资产库首页.md
+├── 01-个人经历/
+├── 02-项目库/项目详情/
+├── 03-求职记录/
+├── 04-证据与来源/
+├── 05-事实与维护/
+└── 06-历史归档/
 ```
+
+`scripts/vault_common.py:vault_path` resolves supported Chinese paths and legacy flat paths. An optional `.vault-layout.json` object can map logical names to relative paths; mappings must stay inside the vault. For custom layouts, use this map rather than creating another data copy or hidden compatibility links. The initializer retains the legacy layout for migration compatibility; organize it into the chosen human layout before declaring setup complete. Project IDs remain stable regardless of display folders. Update links and internal source paths after moves. Archive templates, old entry pages and former exports separately from current facts.
 
 Keep the vault outside the public Skill repository. One vault represents one person. Preserve source files in place unless the user explicitly requests a managed copy in `evidence/`.
 

@@ -18,7 +18,7 @@
 
 ### Publication permission
 
-- `not-approved`: not approved for downstream or external use.
+- `not-approved`: not approved for external expression or transfer. Local reading is governed by model access; publication permission does not bar authorized local maintenance or reading. The conservative `private-analysis` audit is not the access gate for local reading.
 - `application-only`: approved for scoped job-search material after review, not for a public portfolio.
 - `public-approved`: approved for public portfolio or publication after review.
 
@@ -62,7 +62,7 @@ Record, where applicable:
 8. Other material contributors.
 9. Source and known limitation.
 
-If a missing field could materially change the statement, keep the claim `pending`.
+Explicit user confirmation establishes `user-confirmed` status within its stated limits; absence of primary documents or optional exact dates does not revoke it. Keep confirmed values in project results. Missing fields are refinements unless they could materially change meaning or attribution; then qualify the sentence or retain the affected unresolved interpretation as `pending`/`conflict`. Do not label a fact `verified` solely from user confirmation. Tool eligibility is necessary but is not a substitute for checking the exact downstream sentence.
 
 ## Conflict, duplicate, and withdrawal rules
 

@@ -75,7 +75,7 @@ def validate(path: Path, sources_path: Path | None = None) -> tuple[list[str], l
             required_metric = ["metric_name", "metric_unit", "metric_time_window", "metric_population", "metric_calculation"]
             absent = [field for field in required_metric if not (row.get(field) or "").strip()]
             message = f"line {line}: metric fields missing {absent}"
-            if absent and status in {"verified", "user-confirmed"}:
+            if absent and status == "verified":
                 errors.append(message)
             elif absent:
                 warnings.append(message)

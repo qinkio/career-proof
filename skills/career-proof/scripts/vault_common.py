@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import csv
+import json
 import re
 from datetime import datetime, timezone
 from pathlib import Path
@@ -83,3 +84,37 @@ def next_id(prefix: str, existing: Iterable[str]) -> str:
 
 def project_ids(project_dir: Path) -> set[str]:
     return {path.stem for path in project_dir.glob("PRJ-*.md")}
+
+
+HUMAN_PATHS = {
+    "profile.md": "01-个人经历/个人背景.md",
+    "career-timeline.md": "01-个人经历/职业时间线.md",
+    "sources.csv": "04-证据与来源/来源登记.csv",
+    "canonical-claims.csv": "05-事实与维护/已记录事实.csv",
+    "capability-map.csv": "05-事实与维护/能力映射.csv",
+    "review-queue.csv": "05-事实与维护/待补充与审核.csv",
+    "change-log.csv": "05-事实与维护/修改记录.csv",
+    "claim-aliases.csv": "05-事实与维护/事实合并索引.csv",
+    "projects": "02-项目库/项目详情",
+    "evidence": "04-证据与来源/证据资料",
+    "exports": "03-求职记录/临时输出",
+    "archive": "06-历史归档",
+}
+
+
+def vault_path(vault: Path, name: str) -> Path:
+    """Resolve a logical role without requiring root compatibility copies."""
+    layout = vault / ".vault-layout.json"
+    mappings = json.loads(layout.read_text(encoding="utf-8")) if layout.is_file() else {}
+    if not isinstance(mappings, dict):
+        raise ValueError("vault layout must be an object")
+    if name in mappings:
+        relative = mappings[name]
+        if not isinstance(relative, str) or Path(relative).is_absolute():
+            raise ValueError(f"invalid relative layout path: {name}")
+        target = vault / relative
+        if not target.resolve().is_relative_to(vault.resolve()):
+            raise ValueError(f"layout path escapes vault: {name}")
+        return target
+    human = vault / HUMAN_PATHS[name] if name in HUMAN_PATHS else None
+    return human if human is not None and human.exists() else vault / name

@@ -9,7 +9,7 @@ import os
 import sys
 from pathlib import Path
 
-from vault_common import TABLES, next_id, read_csv, utc_now, write_csv
+from vault_common import vault_path, TABLES, next_id, read_csv, utc_now, write_csv
 
 
 TYPE_BY_SUFFIX = {
@@ -101,8 +101,8 @@ def main() -> int:
     if not source_root.is_dir():
         print(f"error: source root not found: {source_root}", file=sys.stderr)
         return 1
-    sources_path = vault / "sources.csv"
-    changes_path = vault / "change-log.csv"
+    sources_path = vault_path(vault, "sources.csv")
+    changes_path = vault_path(vault, "change-log.csv")
     if not sources_path.is_file() or not changes_path.is_file():
         print("error: target is not an initialized v0.2 vault", file=sys.stderr)
         return 1

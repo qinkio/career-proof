@@ -1,13 +1,18 @@
 ---
 name: career-proof
-description: "Build and maintain a private, evidence-backed career asset and project vault from resumes, project files, reviews, presentations, spreadsheets, and notes. Use for 职业资产库、项目库、经历证据、项目证据卡、Claim核验、指标口径、个人贡献归因、技能映射、资料索引、资产迁移、隐私审计, or when another career Skill needs a minimal approved evidence bundle. Do not use for full interview preparation, resume writing, job discovery, career-pivot recommendations, auto-application, or document layout."
+description: "Build and maintain a private, evidence-backed career asset and project vault from resumes, project files, reviews, presentations, spreadsheets, and notes. Use for 职业资产库、项目库、经历证据、项目证据卡、Claim核验、指标口径、个人贡献归因、技能映射、资料索引、资产迁移、隐私审计, or when another career Skill needs current project facts directly from the vault. Do not use for full interview preparation, resume writing, job discovery, career-pivot recommendations, auto-application, or document layout."
 ---
 
 # Career Proof
 
+## Current local vault workflow
+
+Use the current career vault directly for local resume and interview tasks. Read [references/direct-vault-reading.md](references/direct-vault-reading.md) for the reading and update contract. A separate maintained evidence package is not required; exports are optional one-time transfer outputs. This direct-read mode supersedes export preferences elsewhere for local work.
+
+
 Maintain a durable evidence layer:
 
-`source -> project boundary -> atomic claim -> review -> capability map -> scoped export`
+`source -> complete career/project record -> atomic facts and review -> capability map -> direct downstream reading`
 
 Treat the private vault as the source of truth. Treat reports, resumes, interview packs, and Notion pages as downstream expressions.
 
@@ -15,7 +20,7 @@ Treat the private vault as the source of truth. Treat reports, resumes, intervie
 
 Perform only vault work: initialize, index, capture, review, audit, migrate, inspect status, and export approved evidence.
 
-- Route complete interview preparation to `prepare-interview-pack` and provide it a scoped JSON export rather than the full vault.
+- Route complete interview preparation to `prepare-interview-pack`; let it read the current relevant project cards and canonical claims directly. Use a scoped export only when a real transfer requires it.
 - Route resume writing, job discovery, career-pivot planning, application tracking, and offer work to their dedicated workflows.
 - Never silently perform an external upload, Notion write, Git commit, or application action.
 
@@ -24,7 +29,7 @@ Perform only vault work: initialize, index, capture, review, audit, migrate, ins
 1. Read `references/vault-schema.md` before initialization, capture, migration, or schema edits.
 2. Read `references/privacy-and-claims.md` before opening sources, drafting claims, changing permissions, or exporting.
 3. Read `references/operations.md` for indexing, review, snapshots, migration, status, and failure handling.
-4. Read `references/export-contract.md` before producing data for another Skill or Notion.
+4. Read `references/direct-vault-reading.md` for local downstream skills; read `references/export-contract.md` only for a requested transfer, export, or Notion publication.
 
 ## Locate and gate the vault
 
@@ -34,20 +39,21 @@ Before initialization, migration, overwrite, bulk status promotion, restore, or 
 
 1. Resolve exact source and target paths.
 2. Show the planned files and effects.
-3. Obtain explicit approval for the displayed absolute paths and effects. Do not treat a generic request such as “建立资产库” as approval of a later path-specific plan.
+3. Confirm that existing user authorization covers the resolved paths and effects. Ask once only when it does not; ordinary requested updates and reversible organization within the authorized vault do not require repeated confirmation. New destructive replacement and external publication require their own authorization.
 4. Preserve originals and prior versions.
 
 One vault represents one person. For another person, create another vault.
 
 ## Choose an operation
 
-- **Initialize:** run `scripts/init_vault.py ABSOLUTE_TARGET --preview`, report the plan, and stop. Only after a new explicit confirmation run it again with `--yes`.
-- **Index:** index metadata first with `scripts/index_sources.py SOURCE_ROOT VAULT_ROOT`; rerun with `--yes` after approval. Do not parse file content during indexing.
-- **Capture:** read only approved sources, propose project boundaries, and place proposed facts or decisions in `review-queue.csv`. Do not write unapproved facts into `canonical-claims.csv`.
+- **Initialize:** run `scripts/init_vault.py ABSOLUTE_TARGET --preview` and report the plan. Run with `--yes` when existing or new authorization covers the exact target and effects.
+- **Index:** index metadata first with `scripts/index_sources.py SOURCE_ROOT VAULT_ROOT`; rerun with `--yes` when the indexing write is covered by existing or new approval. Do not parse file content during indexing.
+- **Capture:** read only approved sources. Integrate facts explicitly confirmed by the user into the relevant project and canonical claims, recording the confirmation in the review history. Put newly extracted unconfirmed facts and substantive unresolved decisions in `review-queue.csv`. Keep confirmed values visible; missing optional details remain refinements.
 - **Review:** present one coherent project or evidence chain at a time. Promote only user-approved items.
-- **Audit:** run the structural validators and duplicate/conflict candidate detector; never auto-merge.
+- **Audit:** run structural validators and duplicate/conflict candidate detection, then check completeness and actual usability using references/operations.md. Propose substantive merges; apply a merge only within explicit user authorization, preserving old IDs and aliases.
 - **Status:** report source counts, unresolved review items, claim status, capability coverage, conflicts, withdrawn claims, and stale exports.
-- **Export:** create a minimal purpose-bound JSON package with `scripts/export_evidence.py`; do not give downstream Skills unrestricted vault access.
+- **Read downstream:** local skills read the relevant complete project records and current canonical claims directly.
+- **Export:** optionally create a minimal purpose-bound JSON with `scripts/export_evidence.py` when a requested transfer requires it; do not maintain it as a second source.
 - **Migrate:** create a new v0.2 vault with `scripts/migrate_v01_to_v02.py`; never migrate in place.
 
 ## Capture evidence safely
@@ -60,12 +66,12 @@ Create one atomic claim per responsibility, decision, action, metric, scale fact
 
 ## Review before promotion
 
-Put proposed claims, project-boundary decisions, permission changes, duplicate candidates, and conflicts in `review-queue.csv`. The user owns the final decision.
+Put unconfirmed proposed claims, project-boundary decisions, permission changes, duplicate candidates, and conflicts in `review-queue.csv`. Existing explicit user confirmation satisfies confirmation for the same fact and limits; record it rather than asking again. The user owns unresolved substantive decisions.
 
-- Do not promote a metric without definition, baseline/result when applicable, time window, population, calculation, and attribution.
+- Preserve explicitly user-confirmed metric values even when optional measurement details are absent. Record missing details as refinements; unresolved meaning or attribution needs qualified wording or pending/conflict status for the affected statement. Never invent baselines, denominators or ownership.
 - Do not promote ownership language beyond the evidence.
 - Do not resolve conflicting sources by choosing the newest, largest, or most favorable value.
-- Do not auto-merge similar claims.
+- Similar wording alone does not authorize a merge. Approved consolidation preserves all distinct facts, old IDs and an alias to the current fact.
 - Keep withdrawn and prohibited claim IDs reserved; exclude them from future exports.
 
 Append material state changes to `change-log.csv`. Before a bulk change, run `scripts/snapshot_vault.py VAULT_ROOT --yes`.
@@ -82,22 +88,22 @@ Use three layers:
 
 Mark new mappings `proposed` until reviewed. Preserve aliases when standardizing terms.
 
-## Validate and export
+## Validate and deliver
 
-After changes, run:
+After changes, resolve logical paths through the current layout (see references/vault-schema.md), then run:
 
 ```bash
 python3 scripts/validate_vault.py /absolute/private/vault
-python3 scripts/detect_claim_candidates.py /absolute/private/vault/canonical-claims.csv
+python3 scripts/detect_claim_candidates.py /absolute/resolved/current-facts.csv
 ```
 
-Before an external career output, also run:
+Before an external career output, audit using its actual purpose (`resume`, `interview`, or `portfolio`); for example:
 
 ```bash
-python3 scripts/audit_claims.py /absolute/private/vault --purpose interview
+python3 scripts/audit_claims.py /absolute/private/vault --purpose resume
 ```
 
-Generate a scoped package only after approval:
+Only for an explicitly requested transfer, resolve the optional output directory and generate a scoped package:
 
 ```bash
 python3 scripts/export_evidence.py /absolute/private/vault /absolute/private/vault/exports/interview.json \
@@ -112,4 +118,4 @@ When the user explicitly requests Notion, use the available Notion knowledge-cap
 
 ## Deliver the result
 
-Lead with what changed, what remains pending, and what downstream use is now safe. Distinguish structural validation from human approval. End with the next review batch or the exact export that is ready.
+Lead with what changed, what remains pending, and what downstream use is now safe. Distinguish structural validation from completeness, usability and human confirmation. Do not report organization complete until the physical folder view, current links, project/result coverage and downstream reading have been checked. Point to the current vault records and remaining refinements; report an export only if one was requested.

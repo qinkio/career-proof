@@ -10,6 +10,8 @@ import zipfile
 from datetime import datetime, timezone
 from pathlib import Path
 
+from vault_common import vault_path
+
 
 ROOT_FILES = (
     "profile.md", "career-timeline.md", "sources.csv", "canonical-claims.csv",
@@ -32,11 +34,19 @@ def digest(data: bytes) -> str:
 def collect(vault: Path) -> dict[str, bytes]:
     files: dict[str, bytes] = {}
     for name in ROOT_FILES:
-        path = vault / name
+        path = vault_path(vault, name)
         if path.is_file():
-            files[name] = path.read_bytes()
-    for path in sorted((vault / "projects").glob("*.md")):
+            files[path.relative_to(vault).as_posix()] = path.read_bytes()
+    for path in sorted((vault_path(vault, "projects")).glob("*.md")):
         files[path.relative_to(vault).as_posix()] = path.read_bytes()
+    for path in vault.rglob("*.md"):
+        if path.is_symlink() or any(part in {"archive", "06-历史归档", "exports", "临时输出"} for part in path.relative_to(vault).parts):
+            continue
+        files[path.relative_to(vault).as_posix()] = path.read_bytes()
+    for name in ("claim-aliases.csv", ".vault-layout.json"):
+        path = vault_path(vault, name)
+        if path.is_file():
+            files[path.relative_to(vault).as_posix()] = path.read_bytes()
     return files
 
 
@@ -71,7 +81,7 @@ def main() -> int:
     files = collect(vault)
     stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
     snapshot_id = f"SNP-{stamp}"
-    output = vault / "archive" / f"{snapshot_id}.zip"
+    output = vault_path(vault, "archive") / f"{snapshot_id}.zip"
     print(f"SNAPSHOT_PLAN id={snapshot_id} files={len(files)} output={output}")
     print("EXCLUDES external source documents, evidence binaries, exports, and prior archives")
     if not args.yes:

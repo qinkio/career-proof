@@ -140,7 +140,7 @@ Career Proof负责保存可信事实，[prepare-interview-pack](https://github.c
 散落的职业资料
       ↓ Career Proof整理和确认
 可复用的职业资料库
-      ↓ 只导出目标岗位需要的内容
+      ↓ 直接读取相关完整项目与当前事实
 prepare-interview-pack
       ↓
 自我介绍、项目故事、预测问题和练习计划
@@ -151,19 +151,17 @@ prepare-interview-pack
 ## 资料库结构
 
 ```text
-career-vault/
-├── profile.md                 个人背景和求职约束
-├── career-timeline.md         职业时间线
-├── sources.csv                文件目录与读取权限
-├── canonical-claims.csv       已审核的职责、行动和成果
-├── capability-map.csv         能力与证明事实的对应关系
-├── review-queue.csv           待确认问题
-├── change-log.csv             变更历史
-├── projects/                  项目证据卡
-├── evidence/                  可选的受管证据副本
-├── exports/                   提供给其他Skill的最小证据包
-└── archive/                   安全快照
+职业资产库/
+├── 00-职业资产库首页.md
+├── 01-个人经历/
+├── 02-项目库/项目详情/
+├── 03-求职记录/
+├── 04-证据与来源/
+├── 05-事实与维护/
+└── 06-历史归档/
 ```
+
+中文目录与旧版平铺目录均可由工具读取，自定义路径可用 `.vault-layout.json` 映射。现有初始化工具仍创建旧版布局，可按实际使用需要整理，不需要创建重复文件或隐藏兼容链接。完整项目正文保留过程和成果，事实主表记录状态；本人已确认的数据缺少可补充细节时保留成果并提示待补充。整理须核对内容去向、实际目录和下游读取，不能只检查格式。
 
 这里的 `Claim` 指一句能够单独核验的事实，例如“我负责需求访谈”或“该流程覆盖35家虚构门店”，不是包装完成的简历文案。
 

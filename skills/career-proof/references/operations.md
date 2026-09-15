@@ -2,7 +2,7 @@
 
 ## Initialize
 
-Run the initializer with `--preview` and show the exact absolute target. Stop and wait for a new path-specific confirmation before using `--yes`; a generic request to build a vault is not that confirmation. The initializer refuses an installed Skill directory and a Git worktree by default. It creates files only when absent and never overwrites a vault.
+Run the initializer with `--preview` and show the exact absolute target. Use `--yes` only when authorization covers the displayed target and creation effects; reuse existing path-specific approval rather than requesting it again. The initializer refuses an installed Skill directory and a Git worktree by default. It creates files only when absent and never overwrites a vault.
 
 ## Index
 
@@ -20,7 +20,7 @@ Read only sources marked `allowed`. For `summary-only`, use only the manually su
 
 Group evidence around a business objective and result chain. Propose parent/child boundaries when a long program contains distinct stages. Put uncertain boundaries in the review queue.
 
-Draft proposed claims into review items. Do not bypass the queue because a statement appears in a resume or presentation.
+Draft newly extracted unconfirmed claims into review items. Explicit user confirmation may resolve the corresponding review item and update the project and canonical facts in the same operation. Missing optional refinements do not erase confirmed values. Appearance in a resume or presentation alone is not explicit confirmation.
 
 ## Review
 
@@ -62,4 +62,14 @@ Report:
 - unresolved review items by risk;
 - capabilities without eligible evidence;
 - duplicate and conflict candidates;
-- stale exports and latest snapshot.
+- latest snapshot; stale exports only when exports actually exist.
+
+## Preserve completeness during consolidation
+
+Before bulk organization, inventory current and confirmed historical projects, career facts and distinct results. Record each item's target: retained in the current record, merged with a named current fact, pending refinement, or explicitly archived/withdrawn for a stated reason. A short summary is not a replacement for the full project account. Merge confirmed historical narrative into the relevant project; retain source originals in evidence/archive instead of maintaining a separate excerpt page as another current account.
+
+Keep background, problem/judgment, personal responsibility, decisions/actions, difficulties, results, learning and refinements available. Use these sections where useful, without inventing missing content. Preserve all distinct confirmed improvement figures in results, with limits and team attribution. Do not create a project for every source file. Synchronize changed narrative, canonical facts, resolved review items and aliases in the same operation. Preserve stable IDs and log the changes.
+
+## Completion checks
+
+For content consolidation, compare the before/after inventory and explain any unaccounted item. For folder organization, inspect the real visible root and chosen categories; an index page alone is insufficient. Check active links and source relocations. For layout/tool changes, verify validation and snapshot collection on a vault without compatibility links. For downstream usability, read relevant full projects and current facts as a resume/interview task would; ensure confirmed results and refinements are distinguishable. Report actual scope and remaining issues; schema success alone does not establish completeness.

@@ -7,7 +7,7 @@ import argparse
 from pathlib import Path
 
 from validate_claims import validate as validate_claims
-from vault_common import DIRECTORIES, ID_PATTERNS, TABLES, project_ids, read_csv, split_ids
+from vault_common import vault_path, DIRECTORIES, ID_PATTERNS, TABLES, project_ids, read_csv, split_ids
 
 
 SOURCE_ENUMS = {
@@ -45,17 +45,17 @@ def validate(vault: Path) -> tuple[list[str], list[str], dict[str, int]]:
     warnings: list[str] = []
     counts: dict[str, int] = {}
     for required in ("profile.md", "career-timeline.md"):
-        if not (vault / required).is_file():
+        if not (vault_path(vault, required)).is_file():
             errors.append(f"missing file: {required}")
     for directory in DIRECTORIES:
-        if not (vault / directory).is_dir():
+        if not (vault_path(vault, directory)).is_dir():
             errors.append(f"missing directory: {directory}/")
 
-    sources = check_table(vault / "sources.csv", TABLES["sources.csv"], errors)
-    claims = check_table(vault / "canonical-claims.csv", TABLES["canonical-claims.csv"], errors)
-    capabilities = check_table(vault / "capability-map.csv", TABLES["capability-map.csv"], errors)
-    reviews = check_table(vault / "review-queue.csv", TABLES["review-queue.csv"], errors)
-    changes = check_table(vault / "change-log.csv", TABLES["change-log.csv"], errors)
+    sources = check_table(vault_path(vault, "sources.csv"), TABLES["sources.csv"], errors)
+    claims = check_table(vault_path(vault, "canonical-claims.csv"), TABLES["canonical-claims.csv"], errors)
+    capabilities = check_table(vault_path(vault, "capability-map.csv"), TABLES["capability-map.csv"], errors)
+    reviews = check_table(vault_path(vault, "review-queue.csv"), TABLES["review-queue.csv"], errors)
+    changes = check_table(vault_path(vault, "change-log.csv"), TABLES["change-log.csv"], errors)
     counts.update(sources=len(sources), claims=len(claims), capabilities=len(capabilities), reviews=len(reviews), changes=len(changes))
 
     source_ids: set[str] = set()
@@ -73,11 +73,11 @@ def validate(vault: Path) -> tuple[list[str], list[str], dict[str, int]]:
         if row.get("model_access") == "do-not-model" and row.get("content_sha256"):
             errors.append(f"sources.csv line {line}: do-not-model source must not retain content_sha256")
 
-    claim_errors, claim_warnings, _ = validate_claims(vault / "canonical-claims.csv", vault / "sources.csv")
+    claim_errors, claim_warnings, _ = validate_claims(vault_path(vault, "canonical-claims.csv"), vault_path(vault, "sources.csv"))
     errors.extend(claim_errors)
     warnings.extend(claim_warnings)
     claim_by_id = {(row.get("claim_id") or "").strip(): row for row in claims}
-    projects = project_ids(vault / "projects")
+    projects = project_ids(vault_path(vault, "projects"))
     counts["projects"] = len(projects)
     for line, row in enumerate(claims, 2):
         project_id = (row.get("project_id") or "").strip()

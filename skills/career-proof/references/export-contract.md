@@ -1,4 +1,6 @@
-# Scoped export contract
+# Optional scoped export contract
+
+For ordinary local resume and interview tasks, use direct-vault-reading.md and read the current vault directly. This contract applies only when a transfer or explicit export is needed; no separate maintained package is required.
 
 ## Principle
 
@@ -43,7 +45,7 @@ The consumer must:
 4. Avoid presenting IDs or evidence notes in external prose.
 5. Stop using a package after the vault marks it stale or a claim is withdrawn.
 
-For `prepare-interview-pack`, export only the target role's relevant projects and approved claims. Keep pending, conflicting, inferred, prohibited, withdrawn, and unrelated claims out of the package.
+If an export for `prepare-interview-pack` is actually required, export only the target role's relevant projects and approved claims. Keep pending, conflicting, inferred, prohibited, withdrawn, and unrelated claims out of the package.
 
 ## Notion publication
 
